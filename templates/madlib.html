@@ -4,5 +4,22 @@
    {% block content %}
    There once was a {{ color }} {{ noun }} sitting in the Hackbright Lab.
     When {{ person }} went to pick it up, it burst into flames in a totally
-    {{ adj }} way.
+    {{ adj }} way. 
+
+    {% if location %}
+    After that, {{ person }} went to the following places:
+        {% if location | length == 1 %}
+            {{ location[0] }}
+
+        {% else %}
+            {% for place in location[:-1] %} 
+                {{ place }}, 
+            {% endfor %}
+            and {{ location[-1] }}.
+        {% endif %}
+
+    {% else %}
+        After that, {{ person }} had nowhere to go :( 
+    {% endif %}
+
    {% endblock %}

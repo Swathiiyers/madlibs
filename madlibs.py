@@ -56,15 +56,18 @@ def show_madlib_form():
 
 @app.route('/madlib')
 def show_madlib():
+    madlib_files = ["madlib.html", "madlib2.html", "madlib3.html"]
     player_name = request.args.get("name")
     color = request.args.get("color")
     noun = request.args.get("noun")
     adj = request.args.get("adj")
+    location = request.args.getlist("location")
+
     #The argument 'madlib.html' is the html form that renders the values.
     #var name (orange) are variables from templates; its value comes from the
     #variables defined inside the View.
-    return render_template("madlib.html", person=player_name, color=color,
-                            noun=noun, adj=adj)
+    return render_template(choice(madlib_files), person=player_name, color=color,
+                            noun=noun, adj=adj, location=location)
 
 
 if __name__ == '__main__':
